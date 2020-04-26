@@ -1,0 +1,61 @@
+﻿@model IEnumerable<JobApplicationPoster.Models.Application>
+
+@{
+    ViewData["Title"] = "Applications";
+}
+<p>
+    <h1 style="color: cadetblue; text-align: center;">@ViewBag.StudentName </h1>
+</p>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Company)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{var count = 0;}
+            @foreach (var item in Model)
+            {
+                @using (Html.BeginForm("DeleteApplication", "Home", new { appId = item.Identy, id = item.StudentId }))
+                {
+                    <tr>
+                        <td>
+                            @{count++;}
+                            @count.
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Company)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Identy }) |
+                            <input type="submit" value="Delete" onclick="return confirm('You are about to delete this application, Company: @item.Company')" />
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <p>
+        <a asp-action="CreateApplication" asp-route-id=@ViewBag.StuId>Add New Application</a>
+    </p>
+</div>

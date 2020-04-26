@@ -1,0 +1,60 @@
+﻿@model IEnumerable<JobApplicationPoster.Models.Student>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/Poster.css" />
+<h1 style="color: cadetblue; max-width: 900px; text-align: center;">MSSA LAC27 Digital Job Application Poster</h1>
+<div>
+    <table>
+
+        <tbody>
+            <tr>
+                <td style="width: 35px;"></td>
+                <td style="width: 200px;"></td>
+                <td colspan="5">due: 3/13</td>
+                <td id="single" colspan="5">due: 3/20</td>
+                <td id="single" colspan="5">due: 3/27</td>
+                <td id="single" colspan="5">due: 4/3</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="text-center"><b>Name</b></td>
+                <td colspan="5">5 Applications</td>
+                <td id="single" colspan="5">10 Applications</td>
+                <td id="single" colspan="5">15 Applications</td>
+                <td id="single" colspan="5">20 Applications</td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AutoId)
+                    </td>
+                    <td style="padding-left: 5px">
+                        <a asp-action="Applications" asp-route-id="@item.AutoId" style="color:darkred">
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </a>
+                    </td>
+                    @for (int i = 1; i <= 20; i++)
+                    {
+                        if (i <= item.Total)
+                        {
+                            <td style="background-color: cadetblue"></td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <p>
+        <a asp-action="Create">Add New Student</a>
+    </p>
+</div>
